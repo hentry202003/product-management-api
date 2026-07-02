@@ -1,10 +1,16 @@
 package com.hentry.product_management_api.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 
 @Entity
 @Table(name = "Products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     public Long getId() {
         return id;
     }
@@ -29,11 +35,13 @@ public class Product {
         this.price = price;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String name;
-    private Double price;
+    public Integer getStock() {
+        return stock;
+    }
+
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
 
     public String getCategory() {
         return category;
@@ -43,7 +51,12 @@ public class Product {
         this.category = category;
     }
 
+    private String name;
+    private Double price;
     private String category;
-
+    private Integer stock;
 
 }
+
+
+
